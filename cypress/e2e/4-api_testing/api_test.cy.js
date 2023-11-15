@@ -25,7 +25,7 @@ describe('API Testing with Cypress', () => {
   it('should create a new user using POST request', () => {
     // Data pengguna yang akan dibuat
     const newUser = {
-      name: 'John Doe',
+      name: 'Naufal Azhar',
       job: 'Tester',
     };
 
@@ -54,7 +54,7 @@ describe('API Testing with Cypress', () => {
 
     // Data pengguna yang baru
     const updatedUserInfo = {
-      name: 'Naufal',
+      name: 'Naufal Azhar',
       job: 'Dev',
     };
 
