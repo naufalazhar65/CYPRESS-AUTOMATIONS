@@ -40,9 +40,14 @@ describe('Test 01', () => {
       cy.get('#btn-book-appointment').click();
   
       // Verifikasi halaman konfirmasi
+      cy.get('#summary > .container > .row').should('exist');
       cy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');
       cy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');
       cy.get('.col-xs-12.text-center hr.small').should('exist');
+
+      cy.get('.text-center > .btn').click();
+      
+      cy.get('.form-horizontal').should('exist')
     });
   });
   
