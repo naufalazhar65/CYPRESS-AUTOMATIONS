@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pretests": "rm -r cypress/reports/mocha/*.json",
-    "scripts": "cypress run --spec cypress/e2e/4-api_testing/ && npm run posttest",
+    "script-spec": "cypress run --spec cypress/e2e/3-demo/ && npm run posttest",
+    "chrome-test": "cypress run --browser chrome --spec cypress/e2e/3-demo/ && npm run posttest",
     "test": "cypress run --reporter mochawesome || npm run posttest",
     "cypress-open": "cypress open",
     "posttest": "npm run merge-reports && npm run generate-htmlreport",

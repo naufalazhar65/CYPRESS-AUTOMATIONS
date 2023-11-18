@@ -1,123 +1,3662 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 4,
-    "passes": 4,
+    "suites": 63,
+    "tests": 63,
+    "passes": 63,
     "pending": 0,
     "failures": 0,
-    "testsRegistered": 4,
+    "testsRegistered": 63,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
     "skipped": 0,
     "hasSkipped": false,
-    "start": "2023-11-18T17:47:06.855Z",
-    "end": "2023-11-18T17:47:08.258Z",
-    "duration": 1403
+    "start": "2023-11-18T18:03:59.951Z",
+    "end": "2023-11-18T19:20:00.498Z",
+    "duration": 4560547
   },
   "results": [
     {
-      "uuid": "d5c98987-5d90-4333-bb04-a0b0ee0f2a3d",
+      "uuid": "d1e7c561-11dc-4e95-8e63-8d245b7720d8",
       "title": "",
-      "fullFile": "cypress/e2e/4-api_testing/api_test.cy.js",
-      "file": "cypress/e2e/4-api_testing/api_test.cy.js",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
       "beforeHooks": [],
       "afterHooks": [],
       "tests": [],
       "suites": [
         {
-          "uuid": "b36f648c-3b05-44a8-bf66-3e178e23ad69",
-          "title": "API Testing with Cypress",
+          "uuid": "be6a5931-8c08-46de-9e1b-650c0fd31d3a",
+          "title": "Test 01",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "should retrieve a list of users",
-              "fullTitle": "API Testing with Cypress should retrieve a list of users",
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
               "timedOut": null,
-              "duration": 133,
+              "duration": 7201,
               "state": "passed",
-              "speed": "fast",
+              "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "cy.request('GET', 'https://reqres.in/api/users?page=1').then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'data' ada di dalam respons\n  expect(response.body).to.have.property('data');\n  // Verifikasi bahwa 'data' berupa array\n  expect(response.body.data).to.be.an('array');\n  // Verifikasi bahwa setidaknya ada satu pengguna dalam array\n  expect(response.body.data).to.have.length.greaterThan(0);\n  // Outputkan daftar pengguna dalam konsol\n  cy.log('List of Users:', response.body.data);\n});",
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
               "err": {},
-              "uuid": "2d2b1cf0-ec02-4e4b-8a58-54ba9feea3ed",
-              "parentUUID": "b36f648c-3b05-44a8-bf66-3e178e23ad69",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "should create a new user using POST request",
-              "fullTitle": "API Testing with Cypress should create a new user using POST request",
-              "timedOut": null,
-              "duration": 412,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "// Data pengguna yang akan dibuat\nconst newUser = {\n  name: 'Naufal Azhar',\n  job: 'Tester'\n};\ncy.request({\n  method: 'POST',\n  url: 'https://reqres.in/api/users',\n  body: newUser\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 201 (Created)\n  expect(response.status).to.eq(201);\n  // Verifikasi bahwa 'name' dan 'job' yang dikirimkan sesuai dengan yang diterima\n  expect(response.body.name).to.eq(newUser.name);\n  expect(response.body.job).to.eq(newUser.job);\n  // Outputkan informasi pengguna yang baru dibuat dalam konsol\n  cy.log('New User Created:', response.body);\n});",
-              "err": {},
-              "uuid": "2f6db072-2cc7-4f24-a33b-d036fc044c67",
-              "parentUUID": "b36f648c-3b05-44a8-bf66-3e178e23ad69",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "should update user information using PUT request",
-              "fullTitle": "API Testing with Cypress should update user information using PUT request",
-              "timedOut": null,
-              "duration": 388,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "// ID pengguna yang akan diperbarui\nconst userIdToUpdate = 2;\n// Data pengguna yang baru\nconst updatedUserInfo = {\n  name: 'Naufal Azhar',\n  job: 'Dev'\n};\ncy.request({\n  method: 'PUT',\n  url: `https://reqres.in/api/users/${userIdToUpdate}`,\n  body: updatedUserInfo\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200 (OK)\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'name' dan 'job' yang diperbarui sesuai dengan yang diterima\n  expect(response.body.name).to.eq(updatedUserInfo.name);\n  expect(response.body.job).to.eq(updatedUserInfo.job);\n  // Outputkan informasi pengguna yang diperbarui dalam konsol\n  cy.log('User Updated:', response.body);\n});",
-              "err": {},
-              "uuid": "210d30e6-f8fb-453c-9285-4e5f144a9f14",
-              "parentUUID": "b36f648c-3b05-44a8-bf66-3e178e23ad69",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "should delete a user using DELETE request",
-              "fullTitle": "API Testing with Cypress should delete a user using DELETE request",
-              "timedOut": null,
-              "duration": 387,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "// ID pengguna yang akan dihapus\nconst userIdToDelete = 2;\ncy.request({\n  method: 'DELETE',\n  url: `https://reqres.in/api/users/${userIdToDelete}`\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 204 (No Content)\n  expect(response.status).to.eq(204);\n  // Outputkan informasi bahwa pengguna telah dihapus dalam konsol\n  cy.log(`User with ID ${userIdToDelete} Deleted`);\n});",
-              "err": {},
-              "uuid": "b0b244fc-5b1f-4819-b42a-fa6d39c0acad",
-              "parentUUID": "b36f648c-3b05-44a8-bf66-3e178e23ad69",
+              "uuid": "b9787bc3-19c8-43f8-8148-3f19383656c4",
+              "parentUUID": "be6a5931-8c08-46de-9e1b-650c0fd31d3a",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "2d2b1cf0-ec02-4e4b-8a58-54ba9feea3ed",
-            "2f6db072-2cc7-4f24-a33b-d036fc044c67",
-            "210d30e6-f8fb-453c-9285-4e5f144a9f14",
-            "b0b244fc-5b1f-4819-b42a-fa6d39c0acad"
+            "b9787bc3-19c8-43f8-8148-3f19383656c4"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 1320,
+          "duration": 7201,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "84af0113-92f3-49cd-9c4d-7dab534a8836",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "18f8a9ba-1c83-4cb2-b879-5c21ffed6bb6",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 6408,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "4d5adc65-3afb-4dd4-8564-50bd3505c896",
+              "parentUUID": "18f8a9ba-1c83-4cb2-b879-5c21ffed6bb6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4d5adc65-3afb-4dd4-8564-50bd3505c896"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6408,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "5571faa3-7f1a-46a7-993b-91887f0f44b8",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48be4917-4751-4e96-b049-2eaed7b52498",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6029,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "9447e2cc-713d-468f-93d0-4b1202186386",
+              "parentUUID": "48be4917-4751-4e96-b049-2eaed7b52498",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9447e2cc-713d-468f-93d0-4b1202186386"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6029,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "de898bce-411b-4f43-9933-67738bf51303",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ecad836a-07cc-48ee-9e3a-85d1b2f241f9",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5374,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "120bd487-6451-4126-a3ef-7937f067c89b",
+              "parentUUID": "ecad836a-07cc-48ee-9e3a-85d1b2f241f9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "120bd487-6451-4126-a3ef-7937f067c89b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5374,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a3ee9cf5-9a0e-4e98-af49-a5d477358360",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3622cf01-b658-4294-910d-087e41b78f54",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6188,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "8011b3cc-a2cf-46e8-a940-548ccfdc89ce",
+              "parentUUID": "3622cf01-b658-4294-910d-087e41b78f54",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8011b3cc-a2cf-46e8-a940-548ccfdc89ce"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6188,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "35338323-b229-44a2-a81e-3aebbd451a4c",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "aaed7b46-1bc5-4cf7-850c-d35b502cb746",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5238,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "f366e511-f849-4f10-a98b-8c56aaf16744",
+              "parentUUID": "aaed7b46-1bc5-4cf7-850c-d35b502cb746",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f366e511-f849-4f10-a98b-8c56aaf16744"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5238,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b8c0ab30-9705-4532-94ef-ce7eea4f3685",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f067cac9-27e4-40be-a12f-1e67624dbe93",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5830,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "521bf1c1-0f0a-4121-a9f6-9b736309f879",
+              "parentUUID": "f067cac9-27e4-40be-a12f-1e67624dbe93",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "521bf1c1-0f0a-4121-a9f6-9b736309f879"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5830,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "01fede8d-d1f9-4062-9a8c-866b3f7e5443",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "049dd1fa-4ae4-4e45-a3a0-857b9586ce2a",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5888,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "7348bc32-3332-41f5-9b0c-67ce6af00da8",
+              "parentUUID": "049dd1fa-4ae4-4e45-a3a0-857b9586ce2a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7348bc32-3332-41f5-9b0c-67ce6af00da8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5888,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "5c26d7c4-37cf-4c59-9afc-4242ac4d282c",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "24eff1e0-cf4e-4ca9-8abd-f08bf8945822",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6175,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "bc7ad7f9-01dc-417f-b6f2-121828b6c5c1",
+              "parentUUID": "24eff1e0-cf4e-4ca9-8abd-f08bf8945822",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bc7ad7f9-01dc-417f-b6f2-121828b6c5c1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6175,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "17609274-2138-47df-bcdd-f662f53456ca",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f893e949-1e44-40fb-be4f-9712a6b1ae6a",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5830,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "60a5e75b-4931-4949-9327-8b45f30af15a",
+              "parentUUID": "f893e949-1e44-40fb-be4f-9712a6b1ae6a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "60a5e75b-4931-4949-9327-8b45f30af15a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5830,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bd2fe3bd-7bbc-4f45-880d-61cbce5ecbce",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "42dc4064-dd98-4a20-8cf8-06a55fecff66",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6495,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "cc3927ae-b362-465f-bfbb-62fc07802415",
+              "parentUUID": "42dc4064-dd98-4a20-8cf8-06a55fecff66",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cc3927ae-b362-465f-bfbb-62fc07802415"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6495,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c06a6b2b-4822-4c04-acf6-20467e1cc91c",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "31d0d6eb-847d-4880-b7a0-02eb16e5cd7c",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 4959,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "1a7e6402-a33c-405b-8e45-d813cf1dde0c",
+              "parentUUID": "31d0d6eb-847d-4880-b7a0-02eb16e5cd7c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1a7e6402-a33c-405b-8e45-d813cf1dde0c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4959,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "73dd6b34-84a0-4452-8ee7-f21278c2a235",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ce32a908-90a8-4a97-a23c-08c4d5234313",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6453,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "ae8dab13-458a-4709-bfd5-81bed112f441",
+              "parentUUID": "ce32a908-90a8-4a97-a23c-08c4d5234313",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ae8dab13-458a-4709-bfd5-81bed112f441"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6453,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "9300fbad-c7b0-4f39-8d88-15cca496f4d4",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f3d5924e-e650-4409-bac8-84240d678527",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5137,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "d7ecee5e-a4b7-4884-9e78-bffb61665722",
+              "parentUUID": "f3d5924e-e650-4409-bac8-84240d678527",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d7ecee5e-a4b7-4884-9e78-bffb61665722"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5137,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "18ca219e-fe03-4f4b-8d89-90f87b073679",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dcb7eae2-4680-4f35-bbcd-5c6dd6ca1c71",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5995,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "de3f0681-43b0-4bdb-89db-6ab35cb45bf1",
+              "parentUUID": "dcb7eae2-4680-4f35-bbcd-5c6dd6ca1c71",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "de3f0681-43b0-4bdb-89db-6ab35cb45bf1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5995,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b31774e9-96a4-42d1-85b2-25043766abec",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d958a18b-aeca-4272-b22a-8321ee0938c4",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5546,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "e3fd067a-e8c9-4964-bdeb-b1cb523cd97d",
+              "parentUUID": "d958a18b-aeca-4272-b22a-8321ee0938c4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e3fd067a-e8c9-4964-bdeb-b1cb523cd97d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5546,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3924eb9d-9a5f-4e21-9022-24a088d45cbc",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "605d32d1-89d7-4836-b93a-1319b0c8612a",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6873,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "c423d886-0c71-45ad-922b-8fd7b5657e98",
+              "parentUUID": "605d32d1-89d7-4836-b93a-1319b0c8612a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c423d886-0c71-45ad-922b-8fd7b5657e98"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6873,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b73248da-6df8-4b12-87f7-0cead99a1773",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8f00df97-7131-4a36-8ec6-ab0a82599734",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6010,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "6cb408a0-257e-4e56-bcbe-cb5b18ee632d",
+              "parentUUID": "8f00df97-7131-4a36-8ec6-ab0a82599734",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6cb408a0-257e-4e56-bcbe-cb5b18ee632d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6010,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c56557fb-45b2-4943-9723-50a3ac1a0a1e",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d5f9e290-b9d8-487f-9875-0eaa925f13c0",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5813,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "a7de16fb-7b17-47dd-987a-6eba1abab50c",
+              "parentUUID": "d5f9e290-b9d8-487f-9875-0eaa925f13c0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a7de16fb-7b17-47dd-987a-6eba1abab50c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5813,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a4e5f4c1-e331-4a92-9c5b-75ce3442e8d1",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5f9cd500-c8b3-4557-976b-b712d645e3a2",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5966,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "88e37c65-afff-4935-802c-1b25bdd9a181",
+              "parentUUID": "5f9cd500-c8b3-4557-976b-b712d645e3a2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "88e37c65-afff-4935-802c-1b25bdd9a181"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5966,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "4009cebf-5d13-4428-81ce-ac3bfdb432c3",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3cae9517-d8f9-412e-8da3-6f2737897e80",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 14817,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "c6a11c57-279b-4dab-a4bc-26494ee1de93",
+              "parentUUID": "3cae9517-d8f9-412e-8da3-6f2737897e80",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c6a11c57-279b-4dab-a4bc-26494ee1de93"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 14817,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "acf8e0a2-e736-46dd-ac9a-13a9afbc617f",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ebb0ee65-f028-428e-8d84-6bf1642037c3",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6577,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "1a3347b2-8d52-42f1-a9fb-e95a54fe6bf3",
+              "parentUUID": "ebb0ee65-f028-428e-8d84-6bf1642037c3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1a3347b2-8d52-42f1-a9fb-e95a54fe6bf3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6577,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "065a3886-66fb-4af1-a09f-40d83e961c98",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "af6f5506-47c4-4aea-aee2-1e2f10ee204d",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5101,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "daa8e9e7-4cc9-4b49-8bc0-7eda2d0152ac",
+              "parentUUID": "af6f5506-47c4-4aea-aee2-1e2f10ee204d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "daa8e9e7-4cc9-4b49-8bc0-7eda2d0152ac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5101,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "fcc22c46-3e39-4a42-9c53-89d90fdf29dc",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1f464751-4d98-4f75-a637-85812049f2c8",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6109,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "876b1d40-19f4-4215-a4ce-43e98260a484",
+              "parentUUID": "1f464751-4d98-4f75-a637-85812049f2c8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "876b1d40-19f4-4215-a4ce-43e98260a484"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6109,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3e6e1a73-1fc2-4203-8b16-f82b732e7bfd",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f715465c-a05f-4ab1-8b34-9dd0ff82adbf",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 4696,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "dd8ac9b7-357e-4da3-ac86-bc817731f486",
+              "parentUUID": "f715465c-a05f-4ab1-8b34-9dd0ff82adbf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "dd8ac9b7-357e-4da3-ac86-bc817731f486"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4696,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "57506c8d-08b2-4233-8c50-9eba84f80c0e",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c9671d37-3146-49c6-84dd-04190b370e57",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5902,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "8e02fc63-7dd5-496e-8ae1-51572b22b662",
+              "parentUUID": "c9671d37-3146-49c6-84dd-04190b370e57",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8e02fc63-7dd5-496e-8ae1-51572b22b662"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5902,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2bf6a388-dd74-4aac-8293-9544ea9bc114",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e11d8891-c44d-43f5-9c0e-633d054111d2",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5315,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "14129f22-48e7-4fd4-9abf-a0c4d8cdb659",
+              "parentUUID": "e11d8891-c44d-43f5-9c0e-633d054111d2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14129f22-48e7-4fd4-9abf-a0c4d8cdb659"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5315,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f13e292e-c79a-4b1a-bbc4-40981d90cde3",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "927284a0-3f50-41ca-9f11-cb28bb159c49",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6032,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "1ffc65ba-8f97-4ac7-ad47-ac25bc286401",
+              "parentUUID": "927284a0-3f50-41ca-9f11-cb28bb159c49",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1ffc65ba-8f97-4ac7-ad47-ac25bc286401"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6032,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a2cf5b6a-a7f2-47bf-8ab6-1b517640669b",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c5ca17dc-526e-4052-b373-43046e6be74d",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5592,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "a556791b-fccc-4596-b3f1-f706118aa2d3",
+              "parentUUID": "c5ca17dc-526e-4052-b373-43046e6be74d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a556791b-fccc-4596-b3f1-f706118aa2d3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5592,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "06b781d9-a7d4-4d8f-b763-a0bc2416f8e8",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "51c8ba7b-865d-4d5e-aa34-73e9b4f3d060",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6815,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "7cda9f53-4a1c-4698-a19b-c3c3d4f85d7f",
+              "parentUUID": "51c8ba7b-865d-4d5e-aa34-73e9b4f3d060",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7cda9f53-4a1c-4698-a19b-c3c3d4f85d7f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6815,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "db03ba55-0692-410d-8f45-86a7c43b4108",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2ae5904d-fd71-4f8b-b0af-c0f331298298",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6048,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "4517bfe2-e200-4d35-8dbf-c6039fdff5aa",
+              "parentUUID": "2ae5904d-fd71-4f8b-b0af-c0f331298298",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4517bfe2-e200-4d35-8dbf-c6039fdff5aa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6048,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1a59ee3b-8516-47a6-84b9-48f7d2f67919",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6eebb43d-e504-4938-abb5-df96110bc420",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5759,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "cf88f1c5-d448-42f3-8ad4-76b94af6b2e3",
+              "parentUUID": "6eebb43d-e504-4938-abb5-df96110bc420",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cf88f1c5-d448-42f3-8ad4-76b94af6b2e3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5759,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "84de738c-af74-47f1-9b36-df79fe324853",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ce23da2d-de4d-4f4f-9065-9a79416a8e60",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6068,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "f01e4133-bc73-4b4b-9fb3-5411decd51ea",
+              "parentUUID": "ce23da2d-de4d-4f4f-9065-9a79416a8e60",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f01e4133-bc73-4b4b-9fb3-5411decd51ea"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6068,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "130d2619-6e71-45b5-9e76-0f38943cdde3",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c2659566-1b0e-4644-98ee-d8654197f4ef",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6047,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "099ad81b-c2f6-4529-a0b4-82e40433400e",
+              "parentUUID": "c2659566-1b0e-4644-98ee-d8654197f4ef",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "099ad81b-c2f6-4529-a0b4-82e40433400e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6047,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3348e8db-d405-4397-ad02-7741d2dfe693",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6ef0a4ab-2fb8-4bb5-a4d1-64eb2a6299d5",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 2503,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "4a12bdbf-f664-41a2-9d6d-1358dc78925d",
+              "parentUUID": "6ef0a4ab-2fb8-4bb5-a4d1-64eb2a6299d5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4a12bdbf-f664-41a2-9d6d-1358dc78925d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2503,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "9c706792-3c84-48d9-abc4-21755e916890",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "79478740-d57c-4683-a879-1e2dd9d14aa3",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6126,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "f9fea84c-0e32-4d3a-a85f-f29c69fe48e3",
+              "parentUUID": "79478740-d57c-4683-a879-1e2dd9d14aa3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f9fea84c-0e32-4d3a-a85f-f29c69fe48e3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6126,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "aac1cce2-efb3-44b8-89e8-5828c664d9cc",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8d059568-ae7e-4308-9e3f-8f184f2f02ee",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 3295,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "32ece032-1c2c-489d-8ba3-dfb9594a57fc",
+              "parentUUID": "8d059568-ae7e-4308-9e3f-8f184f2f02ee",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "32ece032-1c2c-489d-8ba3-dfb9594a57fc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3295,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "15b4c6e5-ab30-4c5d-a778-924b4100b68b",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e7ada03d-c102-4771-89b4-8ad2e52acee7",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6355,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "685e635b-5ec9-4445-99e1-d8059589c1c2",
+              "parentUUID": "e7ada03d-c102-4771-89b4-8ad2e52acee7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "685e635b-5ec9-4445-99e1-d8059589c1c2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6355,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "36c98135-000e-424e-b104-77121150b126",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9b0f4751-4413-4c1a-be21-23afef910e83",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 2396,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "e3c16b22-ca89-42c0-90e1-6cce6d3fe386",
+              "parentUUID": "9b0f4751-4413-4c1a-be21-23afef910e83",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e3c16b22-ca89-42c0-90e1-6cce6d3fe386"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2396,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3baff22e-eec7-4316-ad6c-46727e119a46",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fba141b7-d833-4dff-add1-97ef5284a433",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5984,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "7b939ad0-0fca-4956-aa72-1caa74cc5f06",
+              "parentUUID": "fba141b7-d833-4dff-add1-97ef5284a433",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7b939ad0-0fca-4956-aa72-1caa74cc5f06"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5984,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "13012f07-3183-48d2-b5cf-2b3ef4c24918",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5b29e01d-8d80-4ee6-a4d8-1cc77640955c",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 2410,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "fd9ea27f-69d8-4628-a1e5-a08323768559",
+              "parentUUID": "5b29e01d-8d80-4ee6-a4d8-1cc77640955c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fd9ea27f-69d8-4628-a1e5-a08323768559"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2410,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "0bdd0b1b-517e-4f86-8cdc-899daf762fc3",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1a4719d8-de26-404e-934c-36ea5a87abb5",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5990,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "64973d14-78be-4067-aeac-ac435ee3210b",
+              "parentUUID": "1a4719d8-de26-404e-934c-36ea5a87abb5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "64973d14-78be-4067-aeac-ac435ee3210b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5990,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f051ffb4-7602-4eac-9ca2-f5f7c2d08375",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a7437d19-d57e-4c44-9ba2-01a41b8f87b2",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6312,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "65b1bc31-1782-49e0-8ab9-e19461e4a166",
+              "parentUUID": "a7437d19-d57e-4c44-9ba2-01a41b8f87b2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "65b1bc31-1782-49e0-8ab9-e19461e4a166"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6312,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7a846744-180e-4957-9015-42ec9ba37cb7",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "67915aec-8492-4806-b546-d34c5ded1034",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 4371,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "32b26691-dd35-4952-8260-e5c0a0419643",
+              "parentUUID": "67915aec-8492-4806-b546-d34c5ded1034",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "32b26691-dd35-4952-8260-e5c0a0419643"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4371,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "6ec4a497-9535-4445-aae0-d3cea99f9e67",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f32648db-5333-4e59-9d66-b7870c900762",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5814,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "60f6b269-2161-4a4a-b8d7-884aa74491b2",
+              "parentUUID": "f32648db-5333-4e59-9d66-b7870c900762",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "60f6b269-2161-4a4a-b8d7-884aa74491b2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5814,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "07a43c76-843e-418e-83fd-cda0fbf9c8b9",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5c6d0632-efd4-4bd6-b25f-d8445381bd5b",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 2589,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "3ae49a19-87b3-4266-9377-712d0e0f878e",
+              "parentUUID": "5c6d0632-efd4-4bd6-b25f-d8445381bd5b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3ae49a19-87b3-4266-9377-712d0e0f878e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2589,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bbc1c427-0fa4-4c58-a7a7-c84b9dba2e15",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "76dc48dd-bd2d-4d76-83b2-59def5ad0306",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6947,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "b6fe5480-33da-4fe2-9ebb-539473bc5fa9",
+              "parentUUID": "76dc48dd-bd2d-4d76-83b2-59def5ad0306",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b6fe5480-33da-4fe2-9ebb-539473bc5fa9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6947,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f23fa874-30aa-4647-8d9a-03ef110401dc",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5981347a-60ae-488a-a16d-5ce22160ac3c",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 3076,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "8a3c9bd2-9b3c-416f-8145-45f52b10af61",
+              "parentUUID": "5981347a-60ae-488a-a16d-5ce22160ac3c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8a3c9bd2-9b3c-416f-8145-45f52b10af61"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3076,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "d606647c-774a-4483-8178-661094021808",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "100b476a-03fa-4b73-a72e-06e116dcd635",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6016,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "adaccbd9-411b-4042-aad7-5870be517f98",
+              "parentUUID": "100b476a-03fa-4b73-a72e-06e116dcd635",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "adaccbd9-411b-4042-aad7-5870be517f98"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6016,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "d8fb1053-5923-43cf-8941-50db612bd00b",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ec1c78f9-b0f9-458e-9759-34f8b168023f",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 2239,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "b09c56d5-e943-4435-a0af-f3157bd5ee47",
+              "parentUUID": "ec1c78f9-b0f9-458e-9759-34f8b168023f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b09c56d5-e943-4435-a0af-f3157bd5ee47"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2239,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1f159460-c3ff-447e-a212-91541b39686e",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4c065475-61f0-4e02-afee-532b36f44422",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5967,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "5f7eec40-00e9-4541-93bb-6f3df1efa1e7",
+              "parentUUID": "4c065475-61f0-4e02-afee-532b36f44422",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5f7eec40-00e9-4541-93bb-6f3df1efa1e7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5967,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a8ed1f6a-e0d7-46ef-b79a-2bbbe2d0be04",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3bc6cde3-9007-42d3-89e1-a8a4f478d7f0",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 4441,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "a5eae64f-8088-4c41-8175-df59edea88b6",
+              "parentUUID": "3bc6cde3-9007-42d3-89e1-a8a4f478d7f0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a5eae64f-8088-4c41-8175-df59edea88b6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4441,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bd434a9e-d527-44ab-9d91-c51a9daa5d5f",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bcc6ae5e-18aa-4e3d-8a6c-4fcf4b0f6ab6",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6170,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "e580d98a-91a4-423c-9c60-15c9312e3ca1",
+              "parentUUID": "bcc6ae5e-18aa-4e3d-8a6c-4fcf4b0f6ab6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e580d98a-91a4-423c-9c60-15c9312e3ca1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6170,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "611b4512-8ecc-4a42-90d0-a7f7944c3ba4",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "443553b4-7902-4739-be8d-22c494f40e94",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 4687,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "0bf0e4c5-f1ac-4b6c-b77a-b9f40ceb8c71",
+              "parentUUID": "443553b4-7902-4739-be8d-22c494f40e94",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0bf0e4c5-f1ac-4b6c-b77a-b9f40ceb8c71"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4687,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2290a404-7347-4254-8d8f-7a2f567d1389",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "791d8ce8-e4c1-4325-86a2-306b5b7beeff",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 9241,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "9ec34695-4b56-4708-bbc6-b7c55c08d39f",
+              "parentUUID": "791d8ce8-e4c1-4325-86a2-306b5b7beeff",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9ec34695-4b56-4708-bbc6-b7c55c08d39f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9241,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "d3800b9b-02bb-45b3-90b9-26adcfa8fc61",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f8ffb337-5d22-496d-b3e1-76a8e493af09",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5841,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "8deef845-43db-4799-9ae8-bf99384b9612",
+              "parentUUID": "f8ffb337-5d22-496d-b3e1-76a8e493af09",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8deef845-43db-4799-9ae8-bf99384b9612"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5841,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b91fa8d9-6824-4696-bbc3-2d6307a7f4bc",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "02cf56c2-8a79-4f5c-90af-ab8c366cf4d6",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 7649,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "d9b00f31-26b1-4e4d-82db-3767fbfeb469",
+              "parentUUID": "02cf56c2-8a79-4f5c-90af-ab8c366cf4d6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d9b00f31-26b1-4e4d-82db-3767fbfeb469"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7649,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "06b80ed4-9825-47e8-8fda-a9f8a81f6845",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0ad0008a-a729-4b55-ab04-7b42cc5aa819",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5723,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "a60db875-6f66-44ee-865e-67872ea39b25",
+              "parentUUID": "0ad0008a-a729-4b55-ab04-7b42cc5aa819",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a60db875-6f66-44ee-865e-67872ea39b25"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5723,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "18b04744-8603-4a04-86d5-504244071b7b",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "60f21af1-4469-46c5-a5b5-2aebe4dea4c6",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6021,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "9868afed-f3a4-44e1-a61b-d4ce8db354c1",
+              "parentUUID": "60f21af1-4469-46c5-a5b5-2aebe4dea4c6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9868afed-f3a4-44e1-a61b-d4ce8db354c1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6021,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "98fa2d64-3fa0-447c-afbe-5863d3e98158",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5adddb2c-85f3-420d-847a-17f54302f646",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 6690,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "27b5948b-515f-4ae0-99af-e7412a0292b9",
+              "parentUUID": "5adddb2c-85f3-420d-847a-17f54302f646",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "27b5948b-515f-4ae0-99af-e7412a0292b9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6690,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "0b533877-6bbb-4548-965b-1ebcfd56f22f",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f7faa41c-9995-4ac0-9b1c-040d90a665b9",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 5791,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "a8c0c621-074f-4f59-888e-6be815fb86ba",
+              "parentUUID": "f7faa41c-9995-4ac0-9b1c-040d90a665b9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a8c0c621-074f-4f59-888e-6be815fb86ba"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5791,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "4e8f1c78-0eea-41b3-b180-f1436ce1ff27",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f313d07a-994c-4d8a-9f9f-856706ed5707",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 7988,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "bedea86b-2bfb-43a5-9630-e7ddf43d45fa",
+              "parentUUID": "f313d07a-994c-4d8a-9f9f-856706ed5707",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bedea86b-2bfb-43a5-9630-e7ddf43d45fa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7988,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a6b945c1-2d39-4a50-8e8b-ee7c4987d911",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7d13c2cb-a8c5-476c-b19f-e91e26ebd641",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 6521,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "4f7c819a-146f-4a93-8886-f9a3eae1c277",
+              "parentUUID": "7d13c2cb-a8c5-476c-b19f-e91e26ebd641",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4f7c819a-146f-4a93-8886-f9a3eae1c277"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6521,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

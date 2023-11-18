@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-18T18:16:45.066Z",
+    "end": "2023-11-18T18:16:52.169Z",
+    "duration": 7103,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "17609274-2138-47df-bcdd-f662f53456ca",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f893e949-1e44-40fb-be4f-9712a6b1ae6a",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5830,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "60a5e75b-4931-4949-9327-8b45f30af15a",
+              "parentUUID": "f893e949-1e44-40fb-be4f-9712a6b1ae6a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "60a5e75b-4931-4949-9327-8b45f30af15a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5830,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

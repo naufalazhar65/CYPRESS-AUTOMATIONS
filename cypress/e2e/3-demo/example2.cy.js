@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+
+
 describe("google", () => {
   it("tests google", () => {
     cy.visit("https://www.google.com/");

@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2023-11-18T18:03:59.951Z",
-    "end": "2023-11-18T18:04:09.351Z",
-    "duration": 9400,
+    "start": "2023-11-18T19:14:49.205Z",
+    "end": "2023-11-18T19:14:59.359Z",
+    "duration": 10154,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "d1e7c561-11dc-4e95-8e63-8d245b7720d8",
+      "uuid": "b91fa8d9-6824-4696-bbc3-2d6307a7f4bc",
       "title": "",
       "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
       "file": "cypress/e2e/3-demo/booking_app.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "be6a5931-8c08-46de-9e1b-650c0fd31d3a",
+          "uuid": "02cf56c2-8a79-4f5c-90af-ab8c366cf4d6",
           "title": "Test 01",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "logs in, books an appointment, and verifies confirmation",
               "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
               "timedOut": null,
-              "duration": 7201,
+              "duration": 7649,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,20 +47,20 @@
               "context": null,
               "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
               "err": {},
-              "uuid": "b9787bc3-19c8-43f8-8148-3f19383656c4",
-              "parentUUID": "be6a5931-8c08-46de-9e1b-650c0fd31d3a",
+              "uuid": "d9b00f31-26b1-4e4d-82db-3767fbfeb469",
+              "parentUUID": "02cf56c2-8a79-4f5c-90af-ab8c366cf4d6",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "b9787bc3-19c8-43f8-8148-3f19383656c4"
+            "d9b00f31-26b1-4e4d-82db-3767fbfeb469"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 7201,
+          "duration": 7649,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
