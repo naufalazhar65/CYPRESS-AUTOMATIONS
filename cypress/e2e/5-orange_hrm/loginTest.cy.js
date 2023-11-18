@@ -2,7 +2,7 @@
 
 describe('Login Functional', () => {
     const username = 'Admin';
-    const validPassword = 'admin123';
+    const validPassword = 'admin23';
     const invalidPassword = 'admin';
 
     beforeEach(() => {

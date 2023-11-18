@@ -1,0 +1,632 @@
+{
+  "stats": {
+    "suites": 8,
+    "tests": 13,
+    "passes": 12,
+    "pending": 0,
+    "failures": 1,
+    "testsRegistered": 13,
+    "passPercent": 92.3076923076923,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2023-11-18T08:09:06.201Z",
+    "end": "2023-11-18T08:11:20.027Z",
+    "duration": 133826
+  },
+  "results": [
+    {
+      "uuid": "74b3f978-5f1e-46b5-bc97-0dafa77411a8",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/booking_app.cy.js",
+      "file": "cypress/e2e/3-demo/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3be9b9d9-9c58-4cd5-a141-8ba014f41d78",
+          "title": "Test 01",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Test 01 logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 6038,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\nconst username = 'John Doe';\nconst password = 'ThisIsNotAPassword';\ncy.get('#txt-username').type(username);\ncy.get('#txt-password').type(password);\ncy.get('#btn-login').click();\ncy.wait(1000);\n// Pilih fasilitas\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible');\ncy.get('#combo_facility').select(selectedOption);\ncy.get('#combo_facility').should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked').uncheck().should('not.be.checked');\n// Tanggal kunjungan\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate);\ncy.get('#txt_visit_date').should('have.value', selectedDate);\n// Pilih program\ncy.get('#radio_program_medicaid').click();\n// Komentar\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment);\n// Booking appointment\ncy.get('#btn-book-appointment').click();\n// Verifikasi halaman konfirmasi\ncy.get('#summary > .container > .row').should('exist');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('exist');\ncy.get('.text-center > .btn').click();\ncy.get('.form-horizontal').should('exist');",
+              "err": {},
+              "uuid": "59cb9c27-49d7-4cb1-b598-83c71da4754b",
+              "parentUUID": "3be9b9d9-9c58-4cd5-a141-8ba014f41d78",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "59cb9c27-49d7-4cb1-b598-83c71da4754b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 6038,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "8e73a169-aee1-4342-86ae-cd99a1ffcd14",
+      "title": "",
+      "fullFile": "cypress/e2e/3-demo/example2.cy.js",
+      "file": "cypress/e2e/3-demo/example2.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3304f11e-eaee-41ed-9bab-26abaa5318a4",
+          "title": "google",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tests google",
+              "fullTitle": "google tests google",
+              "timedOut": null,
+              "duration": 5164,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(\"https://www.google.com/\");\ncy.get(\"#APjFqb\").click();\ncy.get(\"#APjFqb\").type(\"instagram\");\ncy.get(\"#APjFqb\").type(\"{enter}\");\ncy.get('#APjFqb').should('have.value', 'instagram');\ncy.contains('Instagram').click();",
+              "err": {},
+              "uuid": "7a01465b-1a4a-43bc-bdac-87e19f638eee",
+              "parentUUID": "3304f11e-eaee-41ed-9bab-26abaa5318a4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7a01465b-1a4a-43bc-bdac-87e19f638eee"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5164,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "98d9a872-4092-4321-813b-bb8f63d5c32c",
+      "title": "",
+      "fullFile": "cypress/e2e/4-api_testing/api_test.cy.js",
+      "file": "cypress/e2e/4-api_testing/api_test.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0de7fa7b-4b4c-4640-a0a8-b9f6ee17ae62",
+          "title": "API Testing with Cypress",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should retrieve a list of users",
+              "fullTitle": "API Testing with Cypress should retrieve a list of users",
+              "timedOut": null,
+              "duration": 165,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('GET', 'https://reqres.in/api/users?page=1').then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'data' ada di dalam respons\n  expect(response.body).to.have.property('data');\n  // Verifikasi bahwa 'data' berupa array\n  expect(response.body.data).to.be.an('array');\n  // Verifikasi bahwa setidaknya ada satu pengguna dalam array\n  expect(response.body.data).to.have.length.greaterThan(0);\n  // Outputkan daftar pengguna dalam konsol\n  cy.log('List of Users:', response.body.data);\n});",
+              "err": {},
+              "uuid": "89dd2a0b-004a-4447-8291-99243c9c5f40",
+              "parentUUID": "0de7fa7b-4b4c-4640-a0a8-b9f6ee17ae62",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create a new user using POST request",
+              "fullTitle": "API Testing with Cypress should create a new user using POST request",
+              "timedOut": null,
+              "duration": 381,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Data pengguna yang akan dibuat\nconst newUser = {\n  name: 'Naufal Azhar',\n  job: 'Tester'\n};\ncy.request({\n  method: 'POST',\n  url: 'https://reqres.in/api/users',\n  body: newUser\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 201 (Created)\n  expect(response.status).to.eq(201);\n  // Verifikasi bahwa 'name' dan 'job' yang dikirimkan sesuai dengan yang diterima\n  expect(response.body.name).to.eq(newUser.name);\n  expect(response.body.job).to.eq(newUser.job);\n  // Outputkan informasi pengguna yang baru dibuat dalam konsol\n  cy.log('New User Created:', response.body);\n});",
+              "err": {},
+              "uuid": "e6409413-64f8-4972-84a1-3f9311ee55b2",
+              "parentUUID": "0de7fa7b-4b4c-4640-a0a8-b9f6ee17ae62",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update user information using PUT request",
+              "fullTitle": "API Testing with Cypress should update user information using PUT request",
+              "timedOut": null,
+              "duration": 390,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// ID pengguna yang akan diperbarui\nconst userIdToUpdate = 2;\n// Data pengguna yang baru\nconst updatedUserInfo = {\n  name: 'Naufal Azhar',\n  job: 'Dev'\n};\ncy.request({\n  method: 'PUT',\n  url: `https://reqres.in/api/users/${userIdToUpdate}`,\n  body: updatedUserInfo\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200 (OK)\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'name' dan 'job' yang diperbarui sesuai dengan yang diterima\n  expect(response.body.name).to.eq(updatedUserInfo.name);\n  expect(response.body.job).to.eq(updatedUserInfo.job);\n  // Outputkan informasi pengguna yang diperbarui dalam konsol\n  cy.log('User Updated:', response.body);\n});",
+              "err": {},
+              "uuid": "6163179d-a410-454c-b8d1-fc544c0cfecb",
+              "parentUUID": "0de7fa7b-4b4c-4640-a0a8-b9f6ee17ae62",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete a user using DELETE request",
+              "fullTitle": "API Testing with Cypress should delete a user using DELETE request",
+              "timedOut": null,
+              "duration": 413,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// ID pengguna yang akan dihapus\nconst userIdToDelete = 2;\ncy.request({\n  method: 'DELETE',\n  url: `https://reqres.in/api/users/${userIdToDelete}`\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 204 (No Content)\n  expect(response.status).to.eq(204);\n  // Outputkan informasi bahwa pengguna telah dihapus dalam konsol\n  cy.log(`User with ID ${userIdToDelete} Deleted`);\n});",
+              "err": {},
+              "uuid": "93c95e8e-482a-49ec-8a2b-9e9edbaaf809",
+              "parentUUID": "0de7fa7b-4b4c-4640-a0a8-b9f6ee17ae62",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "89dd2a0b-004a-4447-8291-99243c9c5f40",
+            "e6409413-64f8-4972-84a1-3f9311ee55b2",
+            "6163179d-a410-454c-b8d1-fc544c0cfecb",
+            "93c95e8e-482a-49ec-8a2b-9e9edbaaf809"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1349,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "e0cc1520-bf1d-45f3-87d6-1fa28c8beaa7",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_hrm/addUser.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/addUser.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fa60dc34-7052-454e-9048-59572bc468d5",
+          "title": "Dashboard Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify User can add user",
+              "fullTitle": "Dashboard Page Verify User can add user",
+              "timedOut": null,
+              "duration": 19299,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Navigate to the user creation page\ncy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveSystemUser');\ncy.url().should('include', '/web/index.php/admin/saveSystemUser');\n// Select user role\ncy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input').click();\ncy.get('.oxd-select-dropdown > :nth-child(2) > span').click();\ncy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input').should('have.text', 'Admin');\n// Select status\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input').click();\ncy.get('.oxd-select-dropdown > :nth-child(2) > span').click();\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input').should('have.text', 'Enabled');\n// Input username\ncy.get(':nth-child(4) > .oxd-input-group').type('naufalazhar65');\n// Select Employee Name (assuming it's an autocomplete input)\ncy.get('.oxd-autocomplete-text-input > input').type('a');\n// Input password\ncy.get('.user-password-cell > .oxd-input-group > :nth-child(2) > .oxd-input').type('Naufalazhar354');\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Naufalazhar354');\n// Click save button\ncy.get('.oxd-button--secondary').should('contain', 'Save').click();",
+              "err": {},
+              "uuid": "1c1f877d-bd46-488b-b810-ee9365f477a8",
+              "parentUUID": "fa60dc34-7052-454e-9048-59572bc468d5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1c1f877d-bd46-488b-b810-ee9365f477a8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19299,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "743b55f2-359d-466d-a166-28cdf2f73b40",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_hrm/dasboard.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/dasboard.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6dd61d0e-7d20-4241-b58a-bffa47dc7325",
+          "title": "Dashboard Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify all widgets on the dashboard are displayed",
+              "fullTitle": "Dashboard Page Verify all widgets on the dashboard are displayed",
+              "timedOut": null,
+              "duration": 9924,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Time at Work widget\ncy.get('.orangehrm-dashboard-grid > :nth-child(1)').should('exist').find('.oxd-sheet').should('be.visible').and('have.text', 'Time at Work');\n// My Actions widget (uncomment if needed)\n// cy.get(':nth-child(2) > .oxd-sheet').should('be.visible');\n// Quick Launch widget\ncy.get(':nth-child(3) > .oxd-sheet').should('be.visible').and('have.text', 'Quick Launch');\n// Buzz Latest Posts widget\ncy.get(':nth-child(4) > .oxd-sheet').should('be.visible').and('have.text', 'Buzz Latest Posts');\n// Employees on Leave Today widget\ncy.get(':nth-child(5) > .oxd-sheet').should('be.visible').and('have.text', 'Employees on Leave Today');\n// Employee Distribution by Sub Unit widget\ncy.get(':nth-child(6) > .oxd-sheet').should('be.visible').and('have.text', 'Employee Distribution by Sub Unit');\n// Employee Distribution by Location widget\ncy.get(':nth-child(7) > .oxd-sheet').should('be.visible').and('have.text', 'Employee Distribution by Location');",
+              "err": {},
+              "uuid": "2f81938d-0110-4320-a9ef-9d6fd435b222",
+              "parentUUID": "6dd61d0e-7d20-4241-b58a-bffa47dc7325",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2f81938d-0110-4320-a9ef-9d6fd435b222"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9924,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1f21c0ec-bc45-4dcd-aa76-8c97e5b8d7df",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_hrm/forgotPasswordTest.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/forgotPasswordTest.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "11b710d5-86a7-41f9-99df-e0282913834b",
+          "title": "Forgot Password",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "User can reset a password and receive an email",
+              "fullTitle": "Forgot Password User can reset a password and receive an email",
+              "timedOut": null,
+              "duration": 17764,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Click on the \"Forgot Password\" link\ncy.get('.orangehrm-login-forgot > .oxd-text').click();\n// Assertion: Check if the URL includes the expected path\ncy.url().should('include', '/web/index.php/auth/requestPasswordResetCode');\n// Type username for password reset\ncy.get('.oxd-input').type('Admin');\n// Click on the Reset passoword button\ncy.get('.oxd-button--secondary').click();\n// Assertion: Check if the card container exists after password reset request\ncy.get('.orangehrm-card-container').should('exist');\n// Assertion: Check if the success message is displayed\ncy.get('.oxd-text--h6').should('have.text', 'Reset Password link sent successfully');",
+              "err": {},
+              "uuid": "f8565dba-3052-486e-b41a-4368504f5364",
+              "parentUUID": "11b710d5-86a7-41f9-99df-e0282913834b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f8565dba-3052-486e-b41a-4368504f5364"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 17764,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3e6ffd17-23dd-4d1c-aa5b-6adca9de177b",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_hrm/loginTest.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/loginTest.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "914ac45f-5b79-44ba-b4b1-350912a2b156",
+          "title": "Login Functional",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in with valid credentials",
+              "fullTitle": "Login Functional logs in with valid credentials",
+              "timedOut": null,
+              "duration": 20924,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.orangehrm-login-slot').should('exist');\n// Type valid username and password\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(validPassword);\n// Click login button\ncy.get('.oxd-button').click();\n// Assertion: Check if the layout context exists after login\ncy.get('.oxd-layout-context').should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.oxd-layout-context`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.oxd-layout-context`, but never found it.\n    at Context.eval (webpack://cypress_test/./cypress/e2e/5-orange_hrm/loginTest.cy.js:24:38)",
+                "diff": null
+              },
+              "uuid": "2570a864-bfce-4873-b785-4b81cee7302f",
+              "parentUUID": "914ac45f-5b79-44ba-b4b1-350912a2b156",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "fails to log in with invalid credentials",
+              "fullTitle": "Login Functional fails to log in with invalid credentials",
+              "timedOut": null,
+              "duration": 13627,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.orangehrm-login-slot').should('exist');\n// Type invalid username and password\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(invalidPassword);\n// Click login button\ncy.get('.oxd-button').click();\n// Assertion: Check if the alert appears after unsuccessful login\ncy.get('.oxd-alert').should('exist');",
+              "err": {},
+              "uuid": "0cf183ae-b9c9-4ba8-948b-ec037a98d7ea",
+              "parentUUID": "914ac45f-5b79-44ba-b4b1-350912a2b156",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0cf183ae-b9c9-4ba8-948b-ec037a98d7ea"
+          ],
+          "failures": [
+            "2570a864-bfce-4873-b785-4b81cee7302f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 34551,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "21e041cb-4bba-4e7a-8d3b-eb7dd8f9d517",
+          "title": "Forgot Password",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "User can reset a password and receive an email",
+              "fullTitle": "Forgot Password User can reset a password and receive an email",
+              "timedOut": null,
+              "duration": 8770,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Click on the \"Forgot Password\" link\ncy.get('.orangehrm-login-forgot > .oxd-text').click();\n// Assertion: Check if the URL includes the expected path\ncy.url().should('include', '/web/index.php/auth/requestPasswordResetCode');\n// Type username for password reset\ncy.get('.oxd-input').type('Admin');\n// Click on the Reset passoword button\ncy.get('.oxd-button--secondary').click();\n// Assertion: Check if the card container exists after password reset request\ncy.get('.orangehrm-card-container').should('exist');\n// Assertion: Check if the success message is displayed\ncy.get('.oxd-text--h6').should('have.text', 'Reset Password link sent successfully');",
+              "err": {},
+              "uuid": "a997d8e2-097c-43ee-b041-35ed4ba15412",
+              "parentUUID": "21e041cb-4bba-4e7a-8d3b-eb7dd8f9d517",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a997d8e2-097c-43ee-b041-35ed4ba15412"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8770,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "383992db-526c-44d3-9488-4e42a74242e9",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_hrm/searchBar.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/searchBar.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0d0b7142-4cb8-47a5-a6e2-968912014f9b",
+          "title": "Dashboard Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify search bar is working",
+              "fullTitle": "Dashboard Page Verify search bar is working",
+              "timedOut": null,
+              "duration": 12114,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Type into the search bar and check the input value\ncy.get('.oxd-input').type('Admin').should('have.value', 'Admin');\n// Click on a main menu item\ncy.get('.oxd-main-menu-item > .oxd-text').click();\n// Assertion: Check if the top bar header breadcrumb module is visible and has the expected text\ncy.get('.oxd-topbar-header-breadcrumb-module').should('be.visible').and('have.text', 'Admin');",
+              "err": {},
+              "uuid": "7a57fb47-3e3b-45c3-b4d1-865c36cf27f7",
+              "parentUUID": "0d0b7142-4cb8-47a5-a6e2-968912014f9b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7a57fb47-3e3b-45c3-b4d1-865c36cf27f7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12114,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
