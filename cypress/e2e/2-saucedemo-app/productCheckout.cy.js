@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import 'cypress-xpath';
 
-describe('Login and Checkout', () => {
+describe('Product Checkout', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.wait(2000);

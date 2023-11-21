@@ -1,12 +1,13 @@
 /// <reference types="cypress" />
 
-describe('Login Functional', () => {
-    const username = 'Admin';
-    const validPassword = 'admin123';
-    const invalidPassword = 'admin';
+const username = 'Admin';
+const validPassword = 'admin123';
+const invalidPassword = 'admin';
 
+describe('Login Functional', () => {
     beforeEach(() => {
         cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.wait(2000);
     });
 
     // POSITIVE CASE

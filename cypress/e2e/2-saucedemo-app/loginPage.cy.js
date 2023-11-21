@@ -2,7 +2,7 @@
 
 import 'cypress-xpath';
 
-describe('Login, Logout, and Checkout', () => {
+describe('Login and Logout', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.wait(2000);

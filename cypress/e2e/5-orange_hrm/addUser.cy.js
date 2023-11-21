@@ -1,11 +1,15 @@
 /// <reference types="cypress" />
 
-describe('Dashboard Page', () => {
-    const username = 'Admin';
-    const validPassword = 'admin123';
+const username = 'Admin';
+const validPassword = 'admin123';
 
+describe('Add User', () => {
     beforeEach(() => {
         cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.wait(2000);
+    });
+
+    it('Verify User can add user', () => {
         cy.get('.orangehrm-login-slot').should('exist');
 
         // Type valid username and password
@@ -17,9 +21,7 @@ describe('Dashboard Page', () => {
 
         // Assertion: Check if the layout context exists after login
         cy.get('.oxd-layout-context').should('exist');
-    });
 
-    it('Verify User can add user', () => {
         // Navigate to the user creation page
         cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveSystemUser');
         cy.url().should('include', '/web/index.php/admin/saveSystemUser');

@@ -3,6 +3,7 @@
 describe('Forgot Password', () => {
     beforeEach(() => {
         cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.wait(2000);
     });
 
     it('User can reset a password and receive an email', () => {

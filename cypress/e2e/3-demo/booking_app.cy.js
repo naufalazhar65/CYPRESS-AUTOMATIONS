@@ -3,6 +3,7 @@
 describe('Booking App', () => {
     beforeEach(() => {
       cy.visit('https://katalon-demo-cura.herokuapp.com/profile.php#login');
+      cy.wait(2000);
     });
   
     it('logs in, books an appointment, and verifies confirmation', () => {
