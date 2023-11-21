@@ -1,161 +1,141 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 5,
-    "passes": 4,
+    "suites": 2,
+    "tests": 2,
+    "passes": 1,
     "pending": 0,
     "failures": 1,
-    "start": "2023-11-19T16:24:58.981Z",
-    "end": "2023-11-19T16:25:01.819Z",
-    "duration": 2838,
-    "testsRegistered": 5,
-    "passPercent": 80,
+    "start": "2023-11-19T17:15:25.910Z",
+    "end": "2023-11-19T17:15:46.056Z",
+    "duration": 20146,
+    "testsRegistered": 3,
+    "passPercent": 33.33333333333333,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
-    "skipped": 0,
-    "hasSkipped": false
+    "skipped": 1,
+    "hasSkipped": true
   },
   "results": [
     {
-      "uuid": "238bf16e-30db-4d4e-bc2c-ebd4b68da5f6",
+      "uuid": "e2ff18a4-bcea-4d5b-a2bb-e0f37baf8386",
       "title": "",
-      "fullFile": "cypress/e2e/4-api_testing/pet_store.cy.js",
-      "file": "cypress/e2e/4-api_testing/pet_store.cy.js",
+      "fullFile": "cypress/e2e/5-orange_hrm/loginTest.cy.js",
+      "file": "cypress/e2e/5-orange_hrm/loginTest.cy.js",
       "beforeHooks": [],
       "afterHooks": [],
-      "tests": [
-        {
-          "title": "should logout the user",
-          "fullTitle": "should logout the user",
-          "timedOut": null,
-          "duration": 1456,
-          "state": "passed",
-          "speed": "fast",
-          "pass": true,
-          "fail": false,
-          "pending": false,
-          "context": null,
-          "code": "// Assuming you have a user already logged in, and you have the necessary authentication tokens\n// Perform the login before attempting to logout\n// Your login code goes here...\n// Now, call the custom Cypress command to logout the user\ncy.logoutUser();",
-          "err": {},
-          "uuid": "41f7a716-8553-444a-85c5-5ea727e49e45",
-          "parentUUID": "238bf16e-30db-4d4e-bc2c-ebd4b68da5f6",
-          "isHook": false,
-          "skipped": false
-        }
-      ],
+      "tests": [],
       "suites": [
         {
-          "uuid": "88acd630-4ccf-4d5d-a6ef-e3bea7d29f7d",
-          "title": "Petstore User API Testing",
+          "uuid": "f01454e3-85d4-43bc-baf0-31673166ae25",
+          "title": "Login Functional",
           "fullFile": "",
           "file": "",
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [
             {
-              "title": "should create a new user",
-              "fullTitle": "Petstore User API Testing should create a new user",
+              "title": "logs in with valid credentials",
+              "fullTitle": "Login Functional logs in with valid credentials",
               "timedOut": null,
-              "duration": 422,
+              "duration": 10207,
               "state": "failed",
               "speed": null,
               "pass": false,
               "fail": true,
               "pending": false,
               "context": null,
-              "code": "const newUser = {\n  id: 11,\n  username: 'cypressuser',\n  firstName: 'Cypress',\n  lastName: 'User',\n  email: 'cypressuser@example.com',\n  password: 'cypresspassword',\n  phone: '1234567890',\n  userStatus: 1\n};\ncy.request({\n  method: 'POST',\n  url: 'https://petstore.swagger.io/v2/user',\n  body: newUser\n}).then(response => {\n  // Log the response to the console for debugging\n  console.log('Response:', response);\n  // Verify the response status is 200 OK\n  expect(response.status).to.eq(200);\n  // Verify that the response body contains the expected user data\n  expect(response.body).to.eq(newUser.username);\n  // expect(response.body.username).to.eq(newUser.username);\n  // expect(response.body.firstName).to.eq(newUser.firstName);\n  // expect(response.body.lastName).to.eq(newUser.lastName);\n  // expect(response.body.email).to.eq(newUser.email);\n  // expect(response.body.password).to.eq(newUser.password);\n  // expect(response.body.phone).to.eq(newUser.phone);\n  // expect(response.body.userStatus).to.eq(newUser.userStatus);\n});",
+              "code": "cy.get('.orangehrm-login-slot').should('exist');\n// Type valid username and password\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(validPassword);\n// Click login button\ncy.get('.oxd-button').click();\n// Assertion: Check if the layout context exists after login\ncy.get('.oxd-layout-context').should('exist');",
               "err": {
-                "message": "AssertionError: expected { Object (code, type, ...) } to equal 'cypressuser'",
-                "estack": "AssertionError: expected { Object (code, type, ...) } to equal 'cypressuser'\n    at Context.eval (webpack://cypress_test/./cypress/e2e/4-api_testing/pet_store.cy.js:180:31)",
-                "diff": "- { code: 200, type: 'unknown', message: '11' }\n+ 'cypressuser'\n"
+                "message": "CypressError: Timed out after waiting `10000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `10000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Login Functional`",
+                "estack": "CypressError: Timed out after waiting `10000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `10000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Login Functional`\n    at timedOutWaitingForPageLoad (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:130376:64)\n    at <unknown> (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:131364:16)\n    at tryCatcher (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1807:23)\n    at <unknown> (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:4186:41)\n    at tryCatcher (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1807:23)\n    at Promise._settlePromiseFromHandler (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1519:31)\n    at Promise._settlePromise (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1576:18)\n    at Promise._settlePromise0 (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1621:10)\n    at Promise._settlePromises (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:1697:18)\n    at _drainQueueStep (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:2407:12)\n    at _drainQueue (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:2400:9)\n    at Async._drainQueues (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:2416:5)\n    at Async.drainQueues (https://opensource-demo.orangehrmlive.com/__cypress/runner/cypress_runner.js:2286:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://cypress_test/./cypress/e2e/5-orange_hrm/loginTest.cy.js:9:11)",
+                "diff": null
               },
-              "uuid": "9feb0e82-f660-4f6b-abd5-29b1dabb32c0",
-              "parentUUID": "88acd630-4ccf-4d5d-a6ef-e3bea7d29f7d",
+              "uuid": "7d2e4cb8-0c00-4400-afa9-c732d785e530",
+              "parentUUID": "f01454e3-85d4-43bc-baf0-31673166ae25",
               "isHook": false,
               "skipped": false
             },
             {
-              "title": "should retrieve a user by username",
-              "fullTitle": "Petstore User API Testing should retrieve a user by username",
+              "title": "fails to log in with invalid credentials",
+              "fullTitle": "Login Functional fails to log in with invalid credentials",
               "timedOut": null,
-              "duration": 291,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "const usernameToRetrieve = 'cypressuser';\ncy.request('GET', `https://petstore.swagger.io/v2/user/${usernameToRetrieve}`).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.username).to.eq(usernameToRetrieve);\n  cy.log('Retrieved User:', response.body);\n});",
+              "code": "cy.get('.orangehrm-login-slot').should('exist');\n// Type invalid username and password\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(invalidPassword);\n// Click login button\ncy.get('.oxd-button').click();\n// Assertion: Check if the alert appears after unsuccessful login\ncy.get('.oxd-alert').should('exist');",
               "err": {},
-              "uuid": "f4fbfbe8-c8be-4258-962d-8303bdf6bed5",
-              "parentUUID": "88acd630-4ccf-4d5d-a6ef-e3bea7d29f7d",
+              "uuid": "3a752db3-b2fb-4dac-a2b8-54e5653f6528",
+              "parentUUID": "f01454e3-85d4-43bc-baf0-31673166ae25",
               "isHook": false,
-              "skipped": false
-            },
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "7d2e4cb8-0c00-4400-afa9-c732d785e530"
+          ],
+          "pending": [],
+          "skipped": [
+            "3a752db3-b2fb-4dac-a2b8-54e5653f6528"
+          ],
+          "duration": 10207,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "134cb47d-0334-4a28-b2ba-026d104cb30d",
+          "title": "Forgot Password",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
             {
-              "title": "should update user information",
-              "fullTitle": "Petstore User API Testing should update user information",
+              "title": "User can reset a password and receive an email",
+              "fullTitle": "Forgot Password User can reset a password and receive an email",
               "timedOut": null,
-              "duration": 295,
+              "duration": 8698,
               "state": "passed",
-              "speed": "fast",
+              "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "const usernameToUpdate = 'cypressuser';\nconst updatedUserInfo = {\n  id: 11,\n  // Use the correct user ID you want to update\n  username: usernameToUpdate,\n  firstName: 'UpdatedCypress',\n  lastName: 'UpdatedUser',\n  email: 'updatedcypressuser@example.com',\n  password: 'updatedcypresspassword',\n  phone: '9876543210',\n  userStatus: 2\n};\ncy.request({\n  method: 'PUT',\n  url: `https://petstore.swagger.io/v2/user/${usernameToUpdate}`,\n  body: updatedUserInfo\n}).then(response => {\n  expect(response.status).to.eq(200);\n  // expect(response.body.id).to.eq(updatedUserInfo.id);\n  // expect(response.body.username).to.eq(updatedUserInfo.username);\n  // expect(response.body.firstName).to.eq(updatedUserInfo.firstName);\n  // expect(response.body.lastName).to.eq(updatedUserInfo.lastName);\n  // expect(response.body.email).to.eq(updatedUserInfo.email);\n  // expect(response.body.phone).to.eq(updatedUserInfo.phone);\n  // expect(response.body.userStatus).to.eq(updatedUserInfo.userStatus);\n  cy.log('User Information Updated:', response.body);\n});",
+              "code": "// Click on the \"Forgot Password\" link\ncy.get('.orangehrm-login-forgot > .oxd-text').click();\n// Assertion: Check if the URL includes the expected path\ncy.url().should('include', '/web/index.php/auth/requestPasswordResetCode');\n// Type username for password reset\ncy.get('.oxd-input').type('Admin');\n// Click on the Reset passoword button\ncy.get('.oxd-button--secondary').click();\n// Assertion: Check if the card container exists after password reset request\ncy.get('.orangehrm-card-container').should('exist');\n// Assertion: Check if the success message is displayed\ncy.get('.oxd-text--h6').should('have.text', 'Reset Password link sent successfully');",
               "err": {},
-              "uuid": "21dea4a8-28b8-4b1f-9b38-3696fdedc3cc",
-              "parentUUID": "88acd630-4ccf-4d5d-a6ef-e3bea7d29f7d",
-              "isHook": false,
-              "skipped": false
-            },
-            {
-              "title": "should delete a user by username",
-              "fullTitle": "Petstore User API Testing should delete a user by username",
-              "timedOut": null,
-              "duration": 295,
-              "state": "passed",
-              "speed": "fast",
-              "pass": true,
-              "fail": false,
-              "pending": false,
-              "context": null,
-              "code": "const usernameToDelete = 'cypressuser';\ncy.request({\n  method: 'DELETE',\n  url: `https://petstore.swagger.io/v2/user/${usernameToDelete}`\n}).then(response => {\n  expect(response.status).to.eq(200);\n  cy.log(`User with username ${usernameToDelete} Deleted`);\n});",
-              "err": {},
-              "uuid": "19f0747b-8dc4-46df-9041-5e0c9876adcc",
-              "parentUUID": "88acd630-4ccf-4d5d-a6ef-e3bea7d29f7d",
+              "uuid": "135ecd05-4562-49c6-9963-421884b8b87a",
+              "parentUUID": "134cb47d-0334-4a28-b2ba-026d104cb30d",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "f4fbfbe8-c8be-4258-962d-8303bdf6bed5",
-            "21dea4a8-28b8-4b1f-9b38-3696fdedc3cc",
-            "19f0747b-8dc4-46df-9041-5e0c9876adcc"
+            "135ecd05-4562-49c6-9963-421884b8b87a"
           ],
-          "failures": [
-            "9feb0e82-f660-4f6b-abd5-29b1dabb32c0"
-          ],
+          "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 1303,
+          "duration": 8698,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         }
       ],
-      "passes": [
-        "41f7a716-8553-444a-85c5-5ea727e49e45"
-      ],
+      "passes": [],
       "failures": [],
       "pending": [],
       "skipped": [],
-      "duration": 1456,
+      "duration": 0,
       "root": true,
-      "rootEmpty": false,
+      "rootEmpty": true,
       "_timeout": 2000
     }
   ],

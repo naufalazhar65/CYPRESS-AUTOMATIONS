@@ -6,17 +6,18 @@
   "scripts": {
     "pretests": "rm -r cypress/reports/mocha/*.json",
     "script-spec": "cypress run --spec cypress/e2e/3-demo/ && npm run posttest",
-    "chrome-test": "cypress run --browser chrome --spec cypress/e2e/4-api_testing/pet_store.cy.js && npm run posttest",
+    "chrome-test": "cypress run --browser chrome --spec cypress/e2e/3-demo/saucedemo.cy.js && npm run posttest",
     "test": "cypress run --reporter mochawesome || npm run posttest",
     "cypress-open": "cypress open",
     "posttest": "npm run merge-reports && npm run generate-htmlreport",
-    "merge-reports":"mochawesome-merge  cypress/reports/mocha/*.json -o cypress/reports/report.json",
-    "generate-htmlreport":"marge cypress/reports/report.json -f report -o cypress/reports"
+    "merge-reports": "mochawesome-merge  cypress/reports/mocha/*.json -o cypress/reports/report.json",
+    "generate-htmlreport": "marge cypress/reports/report.json -f report -o cypress/reports"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.5.1",
+    "cypress-xpath": "^2.0.1",
     "mochawesome-merge": "^4.3.0"
   },
   "dependencies": {
