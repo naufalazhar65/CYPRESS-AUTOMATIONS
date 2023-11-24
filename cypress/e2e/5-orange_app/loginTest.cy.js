@@ -6,68 +6,61 @@ const invalidPassword = 'admin';
 
 describe('Login Functional', () => {
     beforeEach(() => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.visit('/web/index.php/auth/login');
         cy.wait(2000);
     });
 
     // POSITIVE CASE
-    it('logs in with valid credentials', () => {
-        cy.get('.orangehrm-login-slot').should('exist');
+    it('login with valid credentials', () => {
+        cy.get('.orangehrm-login-slot').should('be.visible');
 
         // Type valid username and password
         cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);
         cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(validPassword);
 
         // Click login button
-        cy.get('.oxd-button').click();
+        cy.get('.oxd-form').submit()
 
         // Assertion: Check if the layout context exists after login
         cy.get('.oxd-layout-context').should('exist');
+        cy.wait(2000);
     });
 
     // NEGATIVE CASE
     it('fails to log in with invalid credentials', () => {
-        cy.get('.orangehrm-login-slot').should('exist');
+        cy.get('.orangehrm-login-slot').should('be.visible');
 
         // Type invalid username and password
         cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);
         cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(invalidPassword);
 
         // Click login button
-        cy.get('.oxd-button').click();
+        cy.get('.oxd-form').submit()
 
         // Assertion: Check if the alert appears after unsuccessful login
-        cy.get('.oxd-alert').should('exist');
-    });
-});
-
-describe('Forgot Password', () => {
-    beforeEach(() => {
-        cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        cy.get('.oxd-alert').should('be.visible');
     });
 
-    it('User can reset a password and receive an email', () => {
-        // Click on the "Forgot Password" link
-        cy.get('.orangehrm-login-forgot > .oxd-text')
-            .click();
+    // NEGATIVE CASE
+    it('fails to log in without input username and password', () => {
+        cy.get('.orangehrm-login-slot').should('be.visible');
+        cy.get('.oxd-form').submit()
+        cy.get(':nth-child(2) > .oxd-input-group > .oxd-text').should('be.visible').and('have.text', 'Required');
+    });
 
-        // Assertion: Check if the URL includes the expected path
-        cy.url().should('include', '/web/index.php/auth/requestPasswordResetCode');
+    // POSITIVE CASE
+    it('logout successfully', () => {
+        // Log in with valid credentials
+        cy.get('.orangehrm-login-slot').should('be.visible');
+        cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);
+        cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(validPassword);
+        cy.get('.oxd-form').submit()
+        cy.get('.oxd-layout-context').should('exist');
 
-        // Type username for password reset
-        cy.get('.oxd-input')
-            .type('Admin');
-
-        // Click on the Reset passoword button
-        cy.get('.oxd-button--secondary')
-            .click();
-
-        // Assertion: Check if the card container exists after password reset request
-        cy.get('.orangehrm-card-container')
-            .should('exist');
-
-        // Assertion: Check if the success message is displayed
-        cy.get('.oxd-text--h6')
-            .should('have.text', 'Reset Password link sent successfully');
+        // USER LOG OUT
+        cy.get('.oxd-userdropdown-tab').click();
+        cy.contains('Logout').click();
+        cy.get('.oxd-form').should('be.visible');
+        cy.contains('Login').should('be.visible');
     });
 });

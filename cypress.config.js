@@ -6,7 +6,7 @@ module.exports = defineConfig({
   pageLoadTimeout: 10000,
   watchForFileChanges: false,
   chromeWebSecurity: false,
-  video: true,
+  video: false,
   videoCompression: true,
   reporter: "mochawesome",
   reporterOptions: {
@@ -18,7 +18,9 @@ module.exports = defineConfig({
   },
   projectId: 'koxvv5',
   e2e: {
-    baseUrl: "https://www.saucedemo.com",
+    // baseUrl: "https://www.saucedemo.com",
+    // baseUrl: "http://localhost:3000",
+    baseUrl: "https://opensource-demo.orangehrmlive.com",    
     setupNodeEvents(on, config) {
       on('before:browser:launch', (browser = {}, launchOptions) => {
         if (browser.family === 'chromium' && browser.name !== 'electron') {

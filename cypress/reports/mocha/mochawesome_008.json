@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-21T09:53:11.879Z",
+    "end": "2023-11-21T09:53:23.159Z",
+    "duration": 11280,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9c16b020-dc93-4e0a-8e3b-4d0686f3bf53",
+      "title": "",
+      "fullFile": "cypress/e2e/3-booking-app/booking_app.cy.js",
+      "file": "cypress/e2e/3-booking-app/booking_app.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2ee0dcec-8784-4520-9af0-572a5679a2ea",
+          "title": "Booking App",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "logs in, books an appointment, and verifies confirmation",
+              "fullTitle": "Booking App logs in, books an appointment, and verifies confirmation",
+              "timedOut": null,
+              "duration": 9070,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login\ncy.get('#txt-username').type(username).should('have.value', username);\ncy.get('#txt-password').type(password).should('have.value', password);\n// Submit login form\ncy.get('.form-horizontal').submit();\n// Verify HTTP response code after login\ncy.request({\n  url: 'https://katalon-demo-cura.herokuapp.com/profile.php#login',\n  // update with the actual URL\n  method: 'POST',\n  form: true,\n  body: {\n    username: username,\n    password: password\n  }\n}).should(response => {\n  expect(response.status).to.eq(200);\n});\ncy.wait(1000);\n// Select facility\nconst selectedOption = 'Seoul CURA Healthcare Center';\ncy.get('#combo_facility').should('be.visible').select(selectedOption).should('have.value', selectedOption);\n// Checkbox\ncy.get('#chk_hospotal_readmission').should('not.be.checked').check().should('be.checked');\n// Visit date\nconst selectedDate = '1999-02-12';\ncy.get('#txt_visit_date').type(selectedDate).should('have.value', selectedDate);\n// Select program\ncy.get('.col-sm-4 [type=\"radio\"]').check('None', {\n  force: true\n}).should('be.checked');\n// Comment\nconst comment = 'hallo world';\ncy.get('#txt_comment').type(comment).should('have.value', comment);\n// Booking appointment\ncy.get('.form-horizontal').submit();\n// Verify confirmation page\ncy.get('#summary > .container > .row').should('be.visible');\ncy.get('.col-xs-12.text-center h2').should('have.text', 'Appointment Confirmation');\ncy.get('.col-xs-12.text-center p.lead').should('have.text', 'Please be informed that your appointment has been booked as following:');\ncy.get('.col-xs-12.text-center hr.small').should('be.visible');\n// Click button on the confirmation page\ncy.get('.text-center').find('.btn').click();\n// Verify returning to the form page after clicking the button\ncy.get('.form-horizontal').should('be.visible');",
+              "err": {},
+              "uuid": "4314857f-798b-423a-831e-f48be89bfb46",
+              "parentUUID": "2ee0dcec-8784-4520-9af0-572a5679a2ea",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4314857f-798b-423a-831e-f48be89bfb46"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9070,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

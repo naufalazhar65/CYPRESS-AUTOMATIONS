@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-21T09:59:35.745Z",
+    "end": "2023-11-21T09:59:50.298Z",
+    "duration": 14553,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "bb974087-7b09-4507-813c-99494dcd94da",
+      "title": "",
+      "fullFile": "cypress/e2e/5-orange_app/dasboard.cy.js",
+      "file": "cypress/e2e/5-orange_app/dasboard.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bb6edd12-5a90-43fb-92ed-4ddad6459a40",
+          "title": "Dashboard Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify all widgets on the dashboard are displayed",
+              "fullTitle": "Dashboard Page Verify all widgets on the dashboard are displayed",
+              "timedOut": null,
+              "duration": 12931,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('.orangehrm-login-slot').should('exist');\n// Type valid username and password\ncy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type(username);\ncy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type(validPassword);\n// Click login button\ncy.get('.oxd-button').click();\n// Assertion: Check if the layout context exists after login\ncy.get('.oxd-layout-context').should('exist');\n// Time at Work widget\ncy.get('.orangehrm-dashboard-grid > :nth-child(1)').should('exist').find('.oxd-sheet').should('be.visible').and('have.text', 'Time at Work');\n// My Actions widget (uncomment if needed)\n// cy.get(':nth-child(2) > .oxd-sheet').should('be.visible');\n// Quick Launch widget\ncy.get(':nth-child(3) > .oxd-sheet').should('be.visible').and('have.text', 'Quick Launch');\n// Buzz Latest Posts widget\ncy.get(':nth-child(4) > .oxd-sheet').should('be.visible').and('have.text', 'Buzz Latest Posts');\n// Employees on Leave Today widget\ncy.get(':nth-child(5) > .oxd-sheet').should('be.visible').and('have.text', 'Employees on Leave Today');\n// Employee Distribution by Sub Unit widget\ncy.get(':nth-child(6) > .oxd-sheet').should('be.visible').and('have.text', 'Employee Distribution by Sub Unit');\n// Employee Distribution by Location widget\ncy.get(':nth-child(7) > .oxd-sheet').should('be.visible').and('have.text', 'Employee Distribution by Location');",
+              "err": {},
+              "uuid": "f3fd8fef-bf67-4fc9-8b30-b9e6c1bd7519",
+              "parentUUID": "bb6edd12-5a90-43fb-92ed-4ddad6459a40",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f3fd8fef-bf67-4fc9-8b30-b9e6c1bd7519"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 12931,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

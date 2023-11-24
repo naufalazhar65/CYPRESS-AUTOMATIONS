@@ -1,0 +1,163 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-21T09:58:49.647Z",
+    "end": "2023-11-21T09:58:51.160Z",
+    "duration": 1513,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ec05ec7c-70c1-4511-9d52-0c94fe03dac3",
+      "title": "",
+      "fullFile": "cypress/e2e/4-api_testing/api_test.cy.js",
+      "file": "cypress/e2e/4-api_testing/api_test.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "87c367d2-2e61-4f7f-99d4-29a4382f60a8",
+          "title": "API Testing with Cypress",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should retrieve a list of users",
+              "fullTitle": "API Testing with Cypress should retrieve a list of users",
+              "timedOut": null,
+              "duration": 154,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('GET', 'https://reqres.in/api/users?page=1').then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'data' ada di dalam respons\n  expect(response.body).to.have.property('data');\n  // Verifikasi bahwa 'data' berupa array\n  expect(response.body.data).to.be.an('array');\n  // Verifikasi bahwa setidaknya ada satu pengguna dalam array\n  expect(response.body.data).to.have.length.greaterThan(0);\n  // Outputkan daftar pengguna dalam konsol\n  cy.log('List of Users:', response.body.data);\n});",
+              "err": {},
+              "uuid": "14ca438a-f7ce-49cf-b439-280b5b31f501",
+              "parentUUID": "87c367d2-2e61-4f7f-99d4-29a4382f60a8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create a new user using POST request",
+              "fullTitle": "API Testing with Cypress should create a new user using POST request",
+              "timedOut": null,
+              "duration": 392,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Data pengguna yang akan dibuat\nconst newUser = {\n  name: 'Naufal Azhar',\n  job: 'Tester'\n};\ncy.request({\n  method: 'POST',\n  url: 'https://reqres.in/api/users',\n  body: newUser\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 201 (Created)\n  expect(response.status).to.eq(201);\n  // Verifikasi bahwa 'name' dan 'job' yang dikirimkan sesuai dengan yang diterima\n  expect(response.body.name).to.eq(newUser.name);\n  expect(response.body.job).to.eq(newUser.job);\n  // Outputkan informasi pengguna yang baru dibuat dalam konsol\n  cy.log('New User Created:', response.body);\n});",
+              "err": {},
+              "uuid": "4a0119f9-caef-40fa-b066-65ca59eb8ab8",
+              "parentUUID": "87c367d2-2e61-4f7f-99d4-29a4382f60a8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update user information using PUT request",
+              "fullTitle": "API Testing with Cypress should update user information using PUT request",
+              "timedOut": null,
+              "duration": 420,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// ID pengguna yang akan diperbarui\nconst userIdToUpdate = 2;\n// Data pengguna yang baru\nconst updatedUserInfo = {\n  name: 'Naufal Azhar',\n  job: 'Dev'\n};\ncy.request({\n  method: 'PUT',\n  url: `https://reqres.in/api/users/${userIdToUpdate}`,\n  body: updatedUserInfo\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 200 (OK)\n  expect(response.status).to.eq(200);\n  // Verifikasi bahwa 'name' dan 'job' yang diperbarui sesuai dengan yang diterima\n  expect(response.body.name).to.eq(updatedUserInfo.name);\n  expect(response.body.job).to.eq(updatedUserInfo.job);\n  // Outputkan informasi pengguna yang diperbarui dalam konsol\n  cy.log('User Updated:', response.body);\n});",
+              "err": {},
+              "uuid": "16e61870-6e37-4727-a420-1355a4f70438",
+              "parentUUID": "87c367d2-2e61-4f7f-99d4-29a4382f60a8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete a user using DELETE request",
+              "fullTitle": "API Testing with Cypress should delete a user using DELETE request",
+              "timedOut": null,
+              "duration": 417,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// ID pengguna yang akan dihapus\nconst userIdToDelete = 2;\ncy.request({\n  method: 'DELETE',\n  url: `https://reqres.in/api/users/${userIdToDelete}`\n}).then(response => {\n  // Verifikasi bahwa responsenya memiliki status code 204 (No Content)\n  expect(response.status).to.eq(204);\n  // Outputkan informasi bahwa pengguna telah dihapus dalam konsol\n  cy.log(`User with ID ${userIdToDelete} Deleted`);\n});",
+              "err": {},
+              "uuid": "627ca71f-be6a-4c34-b031-67fc65eaad9e",
+              "parentUUID": "87c367d2-2e61-4f7f-99d4-29a4382f60a8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14ca438a-f7ce-49cf-b439-280b5b31f501",
+            "4a0119f9-caef-40fa-b066-65ca59eb8ab8",
+            "16e61870-6e37-4727-a420-1355a4f70438",
+            "627ca71f-be6a-4c34-b031-67fc65eaad9e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1383,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

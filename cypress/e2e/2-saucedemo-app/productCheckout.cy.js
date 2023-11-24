@@ -1,25 +1,23 @@
 /// <reference types="cypress" />
 import 'cypress-xpath';
 
+// Data
+const username = 'standard_user';
+const password = 'secret_sauce';
+const firstName = 'Naufal';
+const lastName = 'Azhar';
+const postalCode = '1234';
+
 describe('Product Checkout', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.wait(2000);
   });
-  
-// Data
-  const username = 'standard_user';
-  const password = 'secret_sauce';
-  const firstName = 'Naufal';
-  const lastName = 'Azhar';
-  const postalCode = '1234';
 
   it('should add items to the cart and proceed to checkout', () => {
     // Login
     cy.xpath("//input[@id='user-name']").type(username);
-    cy.wait(1000);
     cy.xpath("//input[@id='password']").type(password);
-    cy.wait(1000);
     cy.xpath("//input[@id='login-button']").click();
     cy.contains('Products').should('be.visible');
     cy.wait(2000);
@@ -49,6 +47,7 @@ describe('Product Checkout', () => {
     cy.get('[data-test="postalCode"]').type(postalCode).should('have.value', postalCode);
 
     cy.get('[data-test="continue"]').click();
+    cy.wait(2000);
 
     // Verify checkout summary
     cy.get('#checkout_summary_container').should('be.visible');
@@ -58,6 +57,7 @@ describe('Product Checkout', () => {
 
     // Complete the order
     cy.get('[data-test="finish"]').click();
+    cy.wait(2000);
 
     // Verify order completion message
     cy.get('#checkout_complete_container').should('be.visible')

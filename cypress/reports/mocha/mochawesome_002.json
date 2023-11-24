@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-11-21T09:47:16.648Z",
+    "end": "2023-11-21T09:47:35.687Z",
+    "duration": 19039,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e1cf0cae-1ef6-4404-adbf-b2409494aa81",
+      "title": "",
+      "fullFile": "cypress/e2e/2-saucedemo-app/loginPage.cy.js",
+      "file": "cypress/e2e/2-saucedemo-app/loginPage.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0eab2daf-e97b-48db-aa14-8e6152379c43",
+          "title": "Login and Logout",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should login with valid credentials",
+              "fullTitle": "Login and Logout should login with valid credentials",
+              "timedOut": null,
+              "duration": 6803,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.xpath(\"//input[@id='user-name']\").type(username).should('have.value', username);\ncy.xpath(\"//input[@id='password']\").type(password).should('have.value', password);\ncy.xpath(\"//input[@id='login-button']\").click();\ncy.contains('Products').should('be.visible');\n// cy.screenshot();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "fa190431-60f1-4c3c-af05-b51fd11c41d7",
+              "parentUUID": "0eab2daf-e97b-48db-aa14-8e6152379c43",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should show an error message for invalid credentials",
+              "fullTitle": "Login and Logout should show an error message for invalid credentials",
+              "timedOut": null,
+              "duration": 4991,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.xpath(\"//input[@id='user-name']\").type(username);\ncy.xpath(\"//input[@id='password']\").type(invalidPassword);\ncy.xpath(\"//input[@id='login-button']\").click();\ncy.wait(2000);\ncy.xpath(\"//h3[contains(text(),'Epic sadface: Username and password do not match a')]\").should('have.text', 'Epic sadface: Username and password do not match any user in this service');\n// cy.screenshot();",
+              "err": {},
+              "uuid": "0eededb5-207c-434c-ada5-89458d923948",
+              "parentUUID": "0eab2daf-e97b-48db-aa14-8e6152379c43",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should logout after successful login",
+              "fullTitle": "Login and Logout should logout after successful login",
+              "timedOut": null,
+              "duration": 7111,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Reuse login code from the first test\ncy.xpath(\"//input[@id='user-name']\").type(username);\ncy.xpath(\"//input[@id='password']\").type(password);\ncy.xpath(\"//input[@id='login-button']\").click();\ncy.wait(2000);\ncy.contains('Products').should('be.visible');\n// Logout\ncy.get('.bm-burger-button').click();\ncy.get('#logout_sidebar_link').click();\ncy.wait(2000);\n// Verify logout\ncy.url().should('include', '/');\ncy.contains('Swag Labs').should('be.visible');\n// cy.screenshot();",
+              "err": {},
+              "uuid": "9f010125-f85a-43a8-aabb-d26a07c6f675",
+              "parentUUID": "0eab2daf-e97b-48db-aa14-8e6152379c43",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fa190431-60f1-4c3c-af05-b51fd11c41d7",
+            "0eededb5-207c-434c-ada5-89458d923948",
+            "9f010125-f85a-43a8-aabb-d26a07c6f675"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18905,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "charts": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress/reports/mocha"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
